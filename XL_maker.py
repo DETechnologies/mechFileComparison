@@ -15,7 +15,7 @@ for yam in yamls:
         if data.find(rx) != -1: 
             index=data.index(rx)
             rc_ind=data.index("rate-constant:{",index)+15
-            next_eq=data.index("equation:",rc_ind)-4
+            next_eq=data.index("}",rc_ind)
             coeffs=data[rc_ind:next_eq]
             A=coeffs[(coeffs.index("A:")+2):(coeffs.index(","))]
             b=coeffs[(coeffs.index("b:")+2):(coeffs.index(",",(coeffs.index("b:")+2)))]
@@ -23,4 +23,4 @@ for yam in yamls:
             main.loc[main.shape[0],:]=[rx,A,b,Ea,yam]          
     f.close()
     
-    main.to_csv("mechfile_comparison.csv")    
+    main.to_csv("mechfile_comparison.csv")   
